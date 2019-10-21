@@ -20,12 +20,12 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
-  `id_tin` int(11) NOT NULL AUTO_INCREMENT,
+  `id_post` int(11) NOT NULL AUTO_INCREMENT,
   `tieude` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `noidung` longtext COLLATE utf8_unicode_ci NOT NULL,
   `hinh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tin`)
+  PRIMARY KEY (`id_post`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -47,7 +47,7 @@ INSERT INTO `posts` VALUES ('17', 'Sư phụ truyền kì của Gia Cát Lượn
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
-  `hoten` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,

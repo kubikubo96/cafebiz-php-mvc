@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <img src="404.jpg" style="margin: 200px auto; width: 100%" />
+            <img src="404.jpg" style="margin: 100px auto; width: 50%" />
         </div>
     </div>
 </div>

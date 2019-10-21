@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Database {
+class database {
 
     public $connection;
 

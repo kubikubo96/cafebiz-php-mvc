@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,13 +11,13 @@
     <title>SB Admin - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Page level plugin CSS-->
-    <link href="../../../assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../../../assets/css/sb-admin.css" rel="stylesheet">
+    <link href="assets/css/sb-admin.css" rel="stylesheet">
 
 </head>
 
@@ -125,21 +124,23 @@
                 <div class="col-md-12">
                     <form name="create" action="" method="post">
                         <div class="form-group">
-                            <label for="hoten">Name</label>
-                            <input type="text" class="form-control" name="hoten" id="hoten" value="">
+                            <label for="tieude">Tiêu đề</label>
+                            <input type="text" class="form-control" name="tieude" id="tieude" value="">
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" value="">
+<!--                            <label for="noidung">Nội dung</label>-->
+                            <p>Nội dung</p>
+<!--                            <input style="height: 250px;" type="text" class="form-control" name="noidung" id="email" value="">-->
+                            <textarea name="noidung" style="width: 100%; height: 200px;"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" value="">
+                            <label for="hinh">Hình</label>
+                            <input type="text" class="form-control" name="hinh" id="hinh" value="">
                         </div>
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label for="created_at">Created_at</label>
                             <input type="datetime-local" class="form-control" name="created_at" id="created_at" value="">
-                        </div> -->
+                        </div>
                         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
@@ -182,31 +183,31 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.php">Logout</a>
+                <a class="btn btn-primary" href="index.php?controller=login&action=index">Logout</a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="../../../assets/vendor/jquery/jquery.min.js"></script>
-<script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="../../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Page level plugin JavaScript-->
-<!--<script src="../../../assets/vendor/chart.js/Chart.min.js"></script>-->
+<!--<script src="assets/vendor/chart.js/Chart.min.js"></script>-->
 
-<script src="../../../assets/vendor/datatables/jquery.dataTables.js"></script>
-<script src="../../../assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="assets/vendor/datatables/jquery.dataTables.js"></script>
+<script src="assets/vendor/datatables/dataTables.bootstrap4.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="../../../assets/js/sb-admin.js"></script>
+<script src="assets/js/sb-admin.js"></script>
 
 <!-- Demo scripts for this page-->
-<script src="../../../assets/js/demo/datatables-demo.js"></script>
-<script src="../../../assets/js/demo/chart-area-demo.js"></script>
+<script src="assets/js/demo/datatables-demo.js"></script>
+<script src="assets/js/demo/chart-area-demo.js"></script>
 
 </body>
 
