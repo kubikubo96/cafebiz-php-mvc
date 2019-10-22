@@ -25,7 +25,7 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="../admin/index.php">Admin</a>
+    <a class="navbar-brand mr-1" href="index.php?controller=index&action=index">Admin</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -92,18 +92,18 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" href="">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../users/index.php">
+            <a class="nav-link" href="index.php?controller=users&action=index">
                 <i class="fas fa-fw fa-user"></i>
                 <span>users</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../posts/index.php">
+            <a class="nav-link" href="index.php?controller=posts&action=index">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Posts</span></a>
         </li>

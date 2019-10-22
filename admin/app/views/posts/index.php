@@ -152,8 +152,12 @@
                         <tr>
                             <th scope="col"><?=$row['id_post']?></th>
                             <td><?=$row['tieude']?></td>
-                            <td> <?=$row['noidung']?></td>
-                            <td><img src="assets/images/<?=$row['hinh']?>" width="100%"/></td>
+                            <td>
+                                <div style=" height: 300px;overflow-x: scroll;">
+                                    <?=$row['noidung']?>
+                                </div>
+                            </td>
+                            <td><img src="../assets/images/<?=$row['hinh']?>" width="100%"/></td>
                             <td><?=$row['created_at']?></td>
                             <td>
                                 <div>
