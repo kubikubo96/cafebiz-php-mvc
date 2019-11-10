@@ -42,13 +42,12 @@ class userModel extends database {
         $name = $data["name"];
         $email = $data["email"];
         $password = md5($data["password"]);
-        $created_at = $data["created_at"];
 
         if (empty($email) || empty($password)) {
             return false;
         }
 
-        $sqlInsert = "INSERT INTO users (name, email, password,created_at) VALUES ('$name', '$email', '$password','$created_at')";
+        $sqlInsert = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
 
         if (mysqli_query($this->connection, $sqlInsert)) {
             return true;

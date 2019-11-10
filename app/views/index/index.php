@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head style="position: relative;">
     <meta charset="UTF-8">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="wapper" style="">
-    <div class="header" style="background-color: #343A40;  position: fixed;z-index: 10000;width: 100%;">
+    <div class="header" style="background-color: #343A40;width: 100%; position: fixed;z-index: 1000;">
         <div class="container">
             <nav style="margin: 0;padding:0;" class="navbar navbar-expand-lg navbar-light bg-dark">
                 <a style="color:white;" class="navbar-brand" href="index.php?controller=index&action=index">
@@ -79,11 +79,10 @@
             <div class="row">
                 <div class="col-md-9 c1" style=" ">
                     <h4 class="c2" style="">
-                        <a href="" style="text-decoration: none;color: black;"><b>
-                                Startup "Uber cho TeleMarketing" từ bỏ 1 triệu USD của Shark Liên để nhận 300.000 USD
-                                của
-                                Shark
-                                Dzung bởi một câu nói: "Em chọn tiền bây giờ hay chọn tiền trong tương lai"</b>
+                        <a href="index.php?controller=chitiet&action=index&id_post=<?= $hotNew['id_post'] ?>"
+                           style="text-decoration: none;color: black;"><b>
+                                <?= $hotNew['tieude'] ?>
+                            </b>
                         </a>
                     </h4>
                     <div class="row" style="margin: 0">
@@ -96,26 +95,39 @@
                                 Thủy"</p>
                         </div>
                         <div class="col-md-7 c4" style="padding: 0px">
-                            <img src="assets/images/anh1.JPG" width="94.3%"/>
+                            <img src="assets/images/<?= $hotNew['hinh'] ?>" width="100%"/>
                         </div>
-                        <div class="col-md-4 c6 c61" style="
+                        <!--                        Vòng lặp cho 3 tin tức-->
+                        <div class="row">
+                            <?php
+                            /**
+                             * mysqli_num_rows() truyền vào tham số của hàm mysqli_query()
+                             * được sử dụng để đếm số bản ghi trả về của câu SQL
+                             */
+                            if (mysqli_num_rows($threeNew) > 0) {
+                                /**
+                                 * mysqli_fetch_assoc() truyền vào biến của mysqli_query()
+                                 * nó dùng để lấy ra từng bản ghi trả về của câu SQL
+                                 * $row sẽ là 1 bản ghi trong bảng
+                                 * vòng lặp while sẽ chạy cho đến khi hết các bản ghi trong bảng trả về từ câu SQL
+                                 */
+                                while ($row = mysqli_fetch_assoc($threeNew)) {
+                                    ?>
+                                    <div class="col-md-4 c6">
+                                        <img src="assets/images/<?= $row['hinh'] ?>" width="100%"/>
+                                        <h6><a style="color: black  ;text-decoration: none;"
+                                               href="index.php?controller=chitiet&action=index&id_post=<?= $row['id_post'] ?>"><?= $row['tieude'] ?></a>
+                                        </h6>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                echo "<br> Không có bản ghi nào trong CSDL";
+                            }
+                            ?>
+                        </div>
 
-                                        ">
-                            <img src="assets/images/a.JPG" width="100%"/>
-                            <h6>Top 5 Youtuber hàng đầu Việt Nam kiếm được bao nhiều tiền mỗi năm?</h6>
-                        </div>
-                        <div class="col-md-4 c6 c62" style="
-                                        ">
-                            <img src="assets/images/b.JPG" width="100%"/>
-                            <h6>Nghỉ việc tập đoàn lớn với mức lương cao để theo đuổi nghề Youtube nhiều bất ổn, vlogger
-                                đời đầu Nhật Anh Trắng: “Điều tốt nhất nên làm cho tuổi trẻ là đi làm thuê”</h6>
-                        </div>
-                        <div class="col-md-4 c6 c62" style="
-                                        ">
-                            <img src="assets/images/c.JPG" width="100%"/>
-                            <h6>Tay trắng dựng nghiệp từ 1 lồng cầu và 3 con gấu bông, ca sĩ Lộ Lộ - trưởng đoàn Lô tô
-                                Sài Gòn Tân Thời được shark Liên đầu tư 1 tỷ đồng vì ý nghĩa xã hội</h6>
-                        </div>
+                        <!--                        Vòng lặp cho All tin tức-->
                         <?php
                         /**
                          * mysqli_num_rows() truyền vào tham số của hàm mysqli_query()
@@ -123,10 +135,11 @@
                          */
                         if (mysqli_num_rows($result) > 0) {
                             /**
-                             * mysqli_fetch_assoc() truyền vào biến của mysqli_query()
-                             * nó dùng để lấy ra từng bản ghi trả về của câu SQL
-                             * $row sẽ là 1 bản ghi trong bảng
-                             * vòng lặp while sẽ chạy cho đến khi hết các bản ghi trong bảng trả về từ câu SQL
+                             * total_record: tổng số records(records là 1 tin)
+                             * current_page: trang hiện tại
+                             * limit: số records hiển thị trên mỗi trang
+                             * start: record bắt đầu trong câu lệnh SQL
+                             *
                              */
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
@@ -136,7 +149,7 @@
                                     </div>
                                     <div class="col-7 c7">
                                         <h4><a style="text-decoration: none;color: #000000;"
-                                               href="index.php?controller=chitiet&action=index&id_post=<?=$row['id_post'] ?>">
+                                               href="index.php?controller=chitiet&action=index&id_post=<?= $row['id_post'] ?>">
                                                 <?= $row['tieude'] ?>
                                             </a></h4>
                                         <p><b>Sống</b> - 2 giờ trước</p>
@@ -148,27 +161,53 @@
                             echo "<br> Không có bản ghi nào trong CSDL";
                         }
                         ?>
-                        <div class="col-12" style="margin: 20px 0 20px 0;">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
+                        <nav aria-label="Page navigation example" style="margin-top: 20px;">
+                            <ul class="pagination">
+                                <?php
+                                // PHẦN HIỂN THỊ PHÂN TRANG
+                                // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+                                if ($current_page > 1 && $total_page > 1) { ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
+                                        <a class="page-link" href="
+                                               index.php?controller=index&action=index&page=<?= ($current_page - 1) ?>"
+                                           aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                             <span class="sr-only">Previous</span>
                                         </a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <?php } ?>
+                                <?php
+                                // Lặp khoảng giữa
+                                for ($i = 1; $i <= $total_page; $i++) {
+                                    if ($i == $current_page) { ?>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="index.php?controller=index&action=index&page=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                        <?php
+                                    } else { ?>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="index.php?controller=index&action=index&page=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                        <?php
+                                    }
+                                } ?>
+                                <?php
+                                // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+                                if ($current_page < $total_page && $total_page > 1) {
+                                    ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
+                                        <a class="page-link"
+                                           href="index.php?controller=index&action=index&page=<?= ($current_page + 1) ?>"
+                                           aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                             <span class="sr-only">Next</span>
                                         </a>
                                     </li>
-                                </ul>
-                            </nav>
-                        </div>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <div class="col-md-3 cc" style="text-align: center;">

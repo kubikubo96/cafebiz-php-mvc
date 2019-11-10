@@ -9,8 +9,8 @@ class registerModel extends database{
     public function store($data) {
         $name = $data["name"];
         $email = $data["email"];
-        $password = $data["password"];
-        $confirm_password = $data["confirm_password"];
+        $password = md5($data["password"]);
+        $confirm_password = md5($data["confirm_password"]);
 
         if (empty($name) || empty($email) || empty($password) || ($password != $confirm_password)) {
             return false;

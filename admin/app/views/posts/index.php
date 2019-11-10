@@ -1,248 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include_once "app/views/partial/header.php";
+?>
+    <div id="wrapper">
 
-<head>
+        <?php
+        include_once "app/views/partial/slidebar.php";
+        ?>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <div id="content-wrapper">
 
-    <title>SB Admin - Dashboard</title>
+            <div class="container-fluid">
 
-    <!-- Custom fonts for this template-->
-    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Page level plugin CSS-->
-    <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin.css" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-    <a class="navbar-brand mr-1" href="index.php?controller=index&action=index">Admin</a>
-
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>
-
-    <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <span class="badge badge-danger">9+</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li>
-        <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-envelope fa-fw"></i>
-                <span class="badge badge-danger">7</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li>
-        <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-circle fa-fw"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="#">Activity Log</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-            </div>
-        </li>
-    </ul>
-
-</nav>
-
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="index.php?controller=users&action=index">
-                <i class="fas fa-fw fa-user"></i>
-                <span>users</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="index.php?controller=posts&action=index">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Posts</span></a>
-        </li>
-    </ul>
-
-    <div id="content-wrapper">
-
-        <div class="container-fluid">
-
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a>Posts</a>
-                </li>
-            </ol>
-            <!--        thêm sửa xóa-->
-            <div class="row">
-                <div class="col-md-12">
-                    <h5><a href="index.php?controller=posts&action=create">Add post</a></h5>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Tiêu đề</th>
-                            <th scope="col">Nội dung</th>
-                            <th scope="col">Hình</th>
-                            <th scope="col">created_at</th>
-                            <th scope="col">
-                                actions
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        /**
-                         * mysqli_num_rows() truyền vào tham số của hàm mysqli_query()
-                         * được sử dụng để đếm số bản ghi trả về của câu SQL
-                         */
-                        if (mysqli_num_rows($result) > 0) {
-                        /**
-                         * mysqli_fetch_assoc() truyền vào biến của mysqli_query()
-                         * nó dùng để lấy ra từng bản ghi trả về của câu SQL
-                         * $row sẽ là 1 bản ghi trong bảng
-                         * vòng lặp while sẽ chạy cho đến khi hết các bản ghi trong bảng trả về từ câu SQL
-                         */
-                        while($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                        <tr>
-                            <th scope="col"><?=$row['id_post']?></th>
-                            <td><?=$row['tieude']?></td>
-                            <td>
-                                <div style=" height: 300px;overflow-x: scroll;">
-                                    <?=$row['noidung']?>
-                                </div>
-                            </td>
-                            <td><img src="../assets/images/<?=$row['hinh']?>" width="100%"/></td>
-                            <td><?=$row['created_at']?></td>
-                            <td>
-                                <div>
-                                    <a class="" href="index.php?controller=posts&action=edit&id_post=<?=$row['id_post']?>">Edit</a>
-                                </div>
-                                <div>
-                                    <a class="" href="index.php?controller=posts&action=delete&id_post=<?=$row['id_post']?>"
-                                       onclick='return xacnhan();'>Delete</a>
-                                </div>
-                            </td>
-                        </tr>
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a>Posts</a>
+                    </li>
+                </ol>
+                <!--        thêm sửa xóa-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5><a href="index.php?controller=posts&action=create">Add post</a></h5>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Tiêu đề</th>
+                                <th scope="col">Nội dung</th>
+                                <th scope="col">Hình</th>
+                                <th scope="col">created_at</th>
+                                <th scope="col">
+                                    actions
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             <?php
-                        }
-                        } else {
-                            echo "<br> Không có bản ghi nào trong CSDL";
-                        }
-                        ?>
-                        </tbody>
-                    </table>
+                            /**
+                             * mysqli_num_rows() truyền vào tham số của hàm mysqli_query()
+                             * được sử dụng để đếm số bản ghi trả về của câu SQL
+                             */
+                            if (mysqli_num_rows($result) > 0) {
+                                /**
+                                 * mysqli_fetch_assoc() truyền vào biến của mysqli_query()
+                                 * nó dùng để lấy ra từng bản ghi trả về của câu SQL
+                                 * $row sẽ là 1 bản ghi trong bảng
+                                 * vòng lặp while sẽ chạy cho đến khi hết các bản ghi trong bảng trả về từ câu SQL
+                                 */
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <tr>
+                                        <th scope="col"><?= $row['id_post'] ?></th>
+                                        <td><?= $row['tieude'] ?></td>
+                                        <td>
+                                            <div style=" height: 300px;overflow-x: scroll;">
+                                                <?= $row['noidung'] ?>
+                                            </div>
+                                        </td>
+                                        <td><img src="../assets/images/<?= $row['hinh'] ?>" width="100%"/></td>
+                                        <td><?= $row['created_at'] ?></td>
+                                        <td>
+                                            <div>
+                                                <a class=""
+                                                   href="index.php?controller=posts&action=edit&id_post=<?= $row['id_post'] ?>">Edit</a>
+                                            </div>
+                                            <div>
+                                                <a class=""
+                                                   href="index.php?controller=posts&action=delete&id_post=<?= $row['id_post'] ?>"
+                                                   onclick='return xacnhan();'>Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            } else {
+                                echo "<br> Không có bản ghi nào trong CSDL";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="" style="margin: 0 auto; text-align: center;">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <?php
+                                    // PHẦN HIỂN THỊ PHÂN TRANG
+                                    // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+                                    if ($current_page > 1 && $total_page > 1) { ?>
+                                        <a class="page-link" href="
+                                               index.php?controller=posts&action=index&page=<?= ($current_page - 1) ?>"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    <?php } ?>
+                                </li>
+                                <?php
+                                // Lặp khoảng giữa
+                                for ($i = 1; $i <= $total_page; $i++) {
+                                    if ($i == $current_page) { ?>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="index.php?controller=posts&action=index&page=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                        <?php
+                                    } else { ?>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="index.php?controller=posts&action=index&page=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                        <?php
+                                    }
+                                } ?>
+                                <li class="page-item">
+                                    <?php
+                                    // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+                                    if ($current_page < $total_page && $total_page > 1) {
+                                        ?>
+                                        <a class="page-link"
+                                           href="index.php?controller=posts&action=index&page=<?= ($current_page + 1) ?>"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                        <?php
+                                    }
+                                    ?>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- /.container-fluid -->
+            <!-- /.container-fluid -->
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright © Your Website 2019</span>
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Your Website 2019</span>
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
 
-    </div>
-    <!-- /.content-wrapper -->
-
-</div>
-<!-- /#wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="index.php?controller=login&action=logout">Logout</a>
-            </div>
         </div>
+        <!-- /.content-wrapper -->
+
     </div>
-</div>
+    <!-- /#wrapper -->
 
-<!-- Bootstrap core JavaScript-->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Page level plugin JavaScript-->
-<!--<script src="assets/vendor/chart.js/Chart.min.js"></script>-->
-
-<script src="assets/vendor/datatables/jquery.dataTables.js"></script>
-<script src="assets/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="assets/js/sb-admin.js"></script>
-
-<!-- Demo scripts for this page-->
-<script src="assets/js/demo/datatables-demo.js"></script>
-<script src="assets/js/demo/chart-area-demo.js"></script>
-
-<script src="assets/js/file.js"></script>
-
-</body>
-
-</html>
+<?php
+include_once "app/views/partial/footer.php";
+?>
