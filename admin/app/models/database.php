@@ -9,7 +9,7 @@ class database {
 
     const DATABASE_USER = "root";
 
-    const DATABASE_PASSWORD = "";
+    const DATABASE_PASSWORD = "root";
 
     const DATABASE_NAME = "cafebiz";
 
